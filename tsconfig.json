@@ -7,7 +7,20 @@
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+        "exactOptionalPropertyTypes": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noPropertyAccessFromIndexSignature": true,
+        "noUncheckedIndexedAccess": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+
+        "checkJs": true
   },
   "include": [
     "resources/js/**/*.ts",
