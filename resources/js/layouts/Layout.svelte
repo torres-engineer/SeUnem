@@ -1,16 +1,16 @@
 <script>
-  import { inertia } from '@inertiajs/svelte'
+	import { inertia } from '@inertiajs/svelte';
 
-  let { children } = $props()
+	let { children } = $props();
 </script>
 
 <main>
-  <header>
-    <a use:inertia href="/">Home</a>
-    <a use:inertia href="/about">About</a>
-    <a use:inertia href="/contact">Contact</a>
-  </header>
-  <article>
-    {@render children()}
-  </article>
+	<header>
+		<a use:inertia href="/">Home</a>
+		<a use:inertia href="/about">About</a>
+		<a use:inertia href="/contact">Contact</a>
+	</header>
+	<article>
+		{@render children()}
+	</article>
 </main>
