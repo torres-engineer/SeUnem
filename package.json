@@ -1,48 +1,64 @@
 {
-	"$schema": "https://json.schemastore.org/package.json",
-	"private": true,
+    "$schema": "https://json.schemastore.org/package.json",
+    "description": "A free software platform for participatory decision-making and collective event management.",
+    "keywords": [
+        "democracy",
+        "FLOSS"
+    ],
+    "homepage": "https://github.com/torres-engineer/SeUnem/",
+    "license": "AGPL-3.0-or-later",
+    "private": true,
+    "author": {
+        "name": "João Augusto Costa Branco Marado Torres",
+        "email": "torres.dev@disroot.org",
+        "url": "https://cravodeabril.pt/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/torres-engineer/SeUnem.git"
+    },
 	"type": "module",
-	"scripts": {
-		"build": "vite build",
-		"build:ssr": "vite build && vite build --ssr",
-		"dev": "vite",
-		"format": "prettier --write resources/",
-		"format:check": "prettier --check resources/",
-		"lint": "eslint . --fix",
-		"types": "tsc --noEmit"
-	},
-	"devDependencies": {
-		"@eslint/compat": "^1.4.0",
-		"@eslint/js": "^9.36.0",
-		"@sveltejs/vite-plugin-svelte": "^6.2.1",
-		"@tailwindcss/forms": "^0.5.10",
-		"@tailwindcss/typography": "^0.5.18",
-		"@tailwindcss/vite": "^4.1.13",
-		"@tsconfig/svelte": "^5.0.5",
-		"@types/node": "^22",
-		"axios": "^1.11.0",
-		"concurrently": "^9.0.1",
-		"eslint": "^9.36.0",
-		"eslint-config-prettier": "^10.1.8",
-		"eslint-plugin-svelte": "^3.12.4",
-		"globals": "^16.4.0",
-		"laravel-vite-plugin": "^2.0.0",
-		"prettier": "^3.6.2",
-		"prettier-plugin-svelte": "^3.4.0",
-		"prettier-plugin-tailwindcss": "^0.6.14",
-		"tailwindcss": "^4.1.13",
-		"typescript": "^5.9.3",
-		"typescript-eslint": "^8.44.1",
-		"vite": "^7.0.7"
-	},
-	"dependencies": {
-		"@inertiajs/svelte": "^2.2.8",
-		"svelte": "5.0.0-next.272"
-	},
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"esbuild",
-			"@tailwindcss/oxide"
-		]
-	}
+    "scripts": {
+        "build": "vite build",
+        "build:ssr": "vite build && vite build --ssr",
+        "dev": "vite",
+        "format": "prettier --write resources/",
+        "format:check": "prettier --check resources/",
+        "lint": "eslint . --fix",
+        "types": "tsc --noEmit"
+    },
+    "devDependencies": {
+        "@eslint/compat": "^1.4.0",
+        "@eslint/js": "^9.36.0",
+        "@sveltejs/vite-plugin-svelte": "^6.2.1",
+        "@tailwindcss/forms": "^0.5.10",
+        "@tailwindcss/typography": "^0.5.18",
+        "@tailwindcss/vite": "^4.1.13",
+        "@tsconfig/svelte": "^5.0.5",
+        "@types/node": "^22",
+        "axios": "^1.11.0",
+        "concurrently": "^9.0.1",
+        "eslint": "^9.36.0",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-svelte": "^3.12.4",
+        "globals": "^16.4.0",
+        "laravel-vite-plugin": "^2.0.0",
+        "prettier": "^3.6.2",
+        "prettier-plugin-svelte": "^3.4.0",
+        "prettier-plugin-tailwindcss": "^0.6.14",
+        "tailwindcss": "^4.1.13",
+        "typescript": "^5.9.3",
+        "typescript-eslint": "^8.44.1",
+        "vite": "^7.0.7"
+    },
+    "dependencies": {
+        "@inertiajs/svelte": "^2.2.8",
+        "svelte": "5.0.0-next.272"
+    },
+    "pnpm": {
+        "onlyBuiltDependencies": [
+            "esbuild",
+            "@tailwindcss/oxide"
+        ]
+    }
 }

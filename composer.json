@@ -1,13 +1,44 @@
 {
-    "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
-    "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": [
-        "laravel",
-        "framework"
+    "_comment": [
+        "SeUnem - A free software platform for participatory decision-making",
+        "and collective event management.",
+        "Copyright (C) 2025  João Augusto Costa Branco Marado Torres",
+        "<torres.dev@disroot.org>",
+        "",
+        "This file is part of SeUnem.",
+        "",
+        "SeUnem is free software: you can redistribute it and/or modify it",
+        "under the terms of the GNU Affero General Public License as published",
+        "by the Free Software Foundation, either version 3 of the License, or",
+        "(at your option) any later version.",
+        "",
+        "SeUnem is distributed in the hope that it will be useful, but WITHOUT",
+        "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY",
+        "or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero General",
+        "Public License for more details.",
+        "",
+        "You should have received a copy of the GNU Affero General Public",
+        "License along with SeUnem.  If not, see",
+        "<https://www.gnu.org/licenses/>."
     ],
-    "license": "MIT",
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "torres-engineer/seunem",
+    "type": "project",
+    "description": "A free software platform for participatory decision-making and collective event management.",
+    "keywords": [
+        "democracy",
+        "FLOSS"
+    ],
+    "homepage": "https://github.com/torres-engineer/SeUnem/",
+    "license": "AGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "João Augusto Costa Branco Marado Torres",
+            "email": "torres.dev@disroot.org",
+            "homepage": "https://github.com/torres-engineer/",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "php": "^8.2",
         "inertiajs/inertia-laravel": "^2.0",
