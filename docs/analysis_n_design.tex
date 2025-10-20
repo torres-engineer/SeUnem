@@ -1,0 +1,707 @@
+%    SeUnem - A free software platform for participatory decision-making and
+%    collective event management.
+%    Copyright (C) 2025  João Augusto Costa Branco Marado Torres
+%    <torres.dev@disroot.org>
+%
+%    This file is part of SeUnem.
+%
+%    SeUnem is free software: you can redistribute it and/or modify it under
+%    the terms of the GNU Affero General Public License as published by the
+%    Free Software Foundation, either version 3 of the License, or (at your
+%    option) any later version.
+%
+%    SeUnem is distributed in the hope that it will be useful, but WITHOUT ANY
+%    WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+%    FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for
+%    more details.
+%
+%    You should have received a copy of the GNU Affero General Public License
+%    along with SeUnem.  If not, see <https://www.gnu.org/licenses/>
+\documentclass[12pt,a4paper,openright,oneside]{memoir}
+
+\usepackage{iftex}
+\ifXeTeX
+  \usepackage{fontspec}
+  \defaultfontfeatures{Ligatures=TeX}
+  \setmainfont{EB Garamond}[
+    Scale = 1.0
+  ]
+  % \setmonofont{Consolas}[
+  %   Scale = 1.0
+  % ]
+\else
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{mathptmx}
+\fi
+
+\usepackage{polyglossia}
+\setdefaultlanguage{portuguese}
+\setotherlanguage{english}
+
+\usepackage[a4paper,top=3cm,bottom=3cm,left=2cm,right=2cm]{geometry}
+
+\OnehalfSpacing
+
+\maxsecnumdepth{subsection}
+\setcounter{secnumdepth}{3}
+\setsecnumformat{\csname the#1\endcsname\quad}
+
+\chapterstyle{section} % clean style
+\renewcommand*{\chapnamefont}{\normalfont\Large\scshape}
+\renewcommand*{\chaptitlefont}{\normalfont\Huge\bfseries}
+
+% \usepackage{titlesec}
+% \titleformat{\chapter}[display]
+%   {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+% \titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+% \titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+% \usepackage{fancyhdr}
+% \pagestyle{fancy}
+% \fancyhf{}
+% \fancyhead[L]{\fontsize{9}{11}\selectfont\leftmark}
+% \fancyhead[R]{\fontsize{9}{11}\selectfont\rightmark}
+% \fancyfoot[R]{\fontsize{8}{9}\selectfont\thepage}
+% \renewcommand{\headrulewidth}{0.4pt}
+% \renewcommand{\footrulewidth}{0pt}
+% \nouppercaseheads
+%
+% \renewcommand{\chaptermark}[1]{\markboth{Capítulo \thechapter\ ---\ #1}{}}
+% \renewcommand{\sectionmark}[1]{\markright{#1}}
+
+\usepackage{caption}
+\DeclareCaptionLabelFormat{ipbeja}{#1~#2}
+\captionsetup{
+  labelfont=bf,
+  labelsep=none,
+  format=plain,
+  textfont=it,
+  justification=justified,
+  singlelinecheck=false,
+  labelformat=ipbeja
+}
+
+\captionsetup[table]{position=top}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\usepackage{minted}
+\setminted{
+  linenos,
+  breaklines,
+  frame=lines,
+  fontsize=\small
+}
+
+\usepackage[style=apa, backend=biber]{biblatex}
+\addbibresource{bibliography.bib}
+\usepackage{csquotes}
+
+\newcommand{\Institute}{Instituto Politécnico de Beja}
+\newcommand{\School}{Escola Superior de Tecnologia e Gestão}
+\newcommand{\Degree}{Licenciatura em Engenharia Informática}
+\newcommand{\Course}{Desenvolvimento de Aplicações Web}
+\newcommand{\Title}{SeUnem}
+\newcommand{\Subtitle}{Eventos Comunitários, Recursos Partilhados e Decisão Coletiva\mbox{ --- }Análise e Desenho}
+\newcommand{\Author}{João Augusto Costa Branco Marado Torres}
+\newcommand{\Advisor}{Dr. Luís Carlos da Silva Bruno}
+\newcommand{\JuryMemberFirst}{Dr. Luís Filipe Nobre Horta Baptista Garcia}
+\newcommand{\JuryMemberSecond}{Dr. João Paulo Barros}
+\newcommand{\Date}{Beja, outubro de 2025}
+
+\usepackage[hidelinks]{hyperref}
+\usepackage{hyperxmp}
+\hypersetup{
+  pdfauthor={\Author},
+  pdftitle={\Title},
+  pdflicenseurl={https://creativecommons.org/licenses/by-sa/4.0/},
+  pdfcopyright={© 2025 \Author --- CC BY-SA 4.0 for PDF, AGPL v3 for source},
+}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\begin{center}
+    \includegraphics{Logotipo_IPBeja_horizontal-5/IPbeja_horizontal}
+
+    \bigskip
+
+    \textsc{\large \School}\\{\large \Degree}
+
+    \bigskip
+
+    \textsc{\large \Course}
+
+    \vspace{4\baselineskip}
+
+    \textsc{\Huge \Title}
+
+    \smallskip
+
+    {\Large \Subtitle}
+
+    \bigskip
+
+    {\large\bfseries \Author}
+
+    \vfill
+
+    \begin{center}
+        \includegraphics[height=25mm,keepaspectratio]{Logotipos_ESTIG/estig}%
+    \end{center}
+
+    \vfill
+
+    {\footnotesize \Date}
+\end{center}
+
+\cleardoublepage
+
+\thispagestyle{empty}
+\begin{center}
+    \textsc{\large \Institute}
+
+    \bigskip
+
+    \textsc{\large \School}\\{\large \Degree}
+
+    \bigskip
+
+    \textsc{\large \Course}
+
+    \vspace{4\baselineskip}
+
+    \textsc{\Huge \Title}
+
+    \smallskip
+
+    {\Large \Subtitle}
+
+    \bigskip
+
+    {\large\bfseries \Author}
+
+    \vspace{2\baselineskip}
+
+    {\large Trabalho realizado no âmbito da unidade curricular de \Course}
+
+    \vspace{2\baselineskip}
+
+    \textsc{Orientação}
+
+    \bigskip
+
+    \Advisor
+
+    \vfill
+
+    {\footnotesize \Date}
+\end{center}
+
+\cleardoublepage
+
+\thispagestyle{empty}
+\begin{center}
+  \textbf{Júri}
+
+  \bigskip
+
+  Responsável: \Advisor\\
+  Vogal: \JuryMemberFirst\\
+  Vogal: \JuryMemberSecond\\
+\end{center}
+\clearpage
+
+\pagenumbering{roman}
+% \fancyfoot[R]{\fontsize{8}{9}\selectfont\thepage}
+
+\chapter*{Resumo}
+\addcontentsline{toc}{chapter}{Resumo}
+\noindent
+...
+
+\bigskip
+
+\textbf{Palavras-chave:} Gestão comunitária; Eventos; Recursos partilhados;
+Decisão coletiva; Participação democrática; Software MVC.
+
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+\noindent
+...
+
+\bigskip
+
+\textbf{Keywords:} Community management; Events; Shared resources; Collective
+decision-making; Democratic participation; MVC software.
+
+\chapter*{Dedicatória}
+\addcontentsline{toc}{chapter}{Dedicatória}
+\begin{flushright}
+    ...
+\end{flushright}
+
+\chapter*{Agradecimentos}
+\addcontentsline{toc}{chapter}{Agradecimentos}
+...
+
+\clearpage
+\tableofcontents
+\clearpage
+\listoffigures
+\clearpage
+\listoftables
+\clearpage
+
+\chapter*{Lista de Abreviaturas e Siglas}
+\addcontentsline{toc}{chapter}{Lista de Abreviaturas e Siglas}
+\begin{description}
+    \item[a11y] \textit{Accessibility}
+    \item[API] \textit{Application Programming Interface}
+    \item[DX] \textit{Developer Experience}
+    \item[FLOSS] \textit{Free Libre and Open Source Software}
+    \item[HTTP] \textit{Hypertext Transfer Protocol}
+    \item[i18n] \textit{Internationalization}
+    \item[MVC] \textit{Model-View-Controller}
+    \item[POO] Programação Orientada a Objetos
+    \item[REST] \textit{Representational State Transfer}
+    \item[TDD] \textit{Test-Driven Development}
+    \item[UML] \textit{Unified Modeling Language}
+\end{description}
+
+% \chapter*{Simbologia e Notação}
+% \addcontentsline{toc}{chapter}{Simbologia e Notação}
+% \begin{description}
+%   \item[$x$] variável independente
+%   \item[$y$] variável dependente
+% \end{description}
+
+\clearpage
+\pagenumbering{arabic}
+% \fancyfoot[R]{\fontsize{8}{9}\selectfont\thepage}
+
+\chapter{Introdução}
+\label{ch:intro}
+% A introdução é um elemento essencial do trabalho que geralmente enquadra o
+% objeto de estudo e apresenta os objetivos do trabalho, a metodologia
+% utilizada e a estrutura do documento.
+
+% Enquadramento geral do projeto, identificando-se o tema, os objetivos e a
+% introdução ao sistema que se pretende desenvolver. Poderá usar o conteúdo
+% submetido no moodle relativo à proposta de tema de projeto. Descrever
+% sumariamente os capítulos que o relatório tem escritos posteriormente a este
+% capítulo introdutório.
+
+Este relatório é sobre a fase de análise e desenho do SeUnem, que por enquanto
+é apenas uma plataforma de gestão de eventos democrática que também servirá
+para eu ter uma ideia de como a tecnologia deve auxiliar a participação
+democrática. Apenas auxiliar porque tenho a ideia que a participação
+democrática é um problema social, e não vai ser com a tecnologia que esses
+problemas vão ser resolvidos.\footcite{d3_vote} E como deve auxiliar porque só
+pode existir uma forma correta de fazê-lo: usando \textit{Free Libre and Open
+Source Software} (FLOSS) (o Software
+Livre)\footcite{ansol_software_livre}\footcite{fsf_about_free_software}\footcite{gnu_free_software},
+e serviços descentralizados (protocolos ao invés de
+plataformas).\footcite{d3_platforms_protocols} Tem que ser possível o
+\textit{self-host} em que o objetivo final seria ter algo
+federado.\footcite{fedigov}
+
+Recentemente ouvi falar dos projetos \autocite{decidim} e \autocite{voca}, que
+apesar de nunca ter usado e não saber quase nada acerca deles, tenho a sensação
+que muitas das ideias que queria aplicar no SeUnem foram também aplicadas lá, e
+os temas são relativamente parecidos.
+
+\section{Contexto}
+% Apresente o contexto do estágio/projeto e a motivação.
+
+Imagina que tu fases parte de uma comunidade. Era muita fixe se conseguissem
+reunir-se para criar um evento e partilhar mais sobre as vossas paixões entre
+vós, mas também talvez entre pessoas curiosas que viram um anúncio sobre o
+vosso evento e quiseram aparecer. Eu nunca estive nessa situação para ser
+sincero, mas não parece ser algo fácil de fazer. Uma comunidade é feita de
+pessoas que têm algo em comum, mas não deixam de ser indivíduos com vidas
+diferentes umas das outras. Eu gostava que local do evento fosse à frente da
+minha casa, mas como eu vivo na Madeira e o resto da comunidade está espalhada
+por Portugal continental, eles provavelmente iriam preferir que o evento fosse
+algures entre a região Centro e a Península de Setúbal. Uns adoravam que as
+atividades mais fixes fossem antes da hora de almoço, outros depois. É
+complicado agradar todo o mundo, mas de certeza que com democracia direta, o
+resultado para a maioria (senão todos) vai ser a satisfação. Como é que de
+forma simples consegues convidar pessoas fora dessa bolha a fazer uma visita?
+Mas não acaba por aí! Esses eventos vão requerer coisas, podem ser cadeiras e
+mesas, ou hardware e software caso seja necessário disponibilizar ao vivo
+streaming do evento para o bacano lá da ilha. Essa gestão de equipamentos não é
+tão fácil, e é capaz até de ter custos um pouco elevados. Bom é que vós não
+sois a única comunidade a existir em Portugal. Tem aquela comunidade meio
+esquisita de [...] que no mês passado, fez o seu evento anual, e que por isso
+já tem cadeiras e mesas disponíveis e que não estão em uso por mais uns 10
+meses talvez, e que era fixe eles emprestarem esses produtos. Talvez só
+precisem de metade das cadeiras que eles têm, bom. Talvez precisam das cadeiras
+que eles têm e mais 20 (que lá em comunidade vão arranjar essas cadeiras que
+falam), então arranjam as cadeiras que faltam e quem sabe para o ano essas
+cadeiras novas vão fazer falta àqueles esquisitos.
+
+Então o projeto vai ser um gestor de eventos para comunidades. Cria um evento
+para uma comunidade, dá data, hora e local e uma pequena descrição. Depois
+esses eventos serão listados. Se alguém quiser participar, diz que também vai,
+e dá "\textit{up}"/"\textit{boost}" nesse evento (podendo ser usado para
+apresentar os eventos mais populares). Quem vai e faz parte desse evento pode
+dar feedback antes, durante, e depois do evento. Esse feedback pode fazer com
+que data, hora ou local mudem. Se a mudança ocorrer, quem já ia participar tem
+de ser notificado sobre a mudança para confirmar se ainda está interessado no
+evento ou não (como padrão, ele não vai estar interessado até ele dizer que
+sim). Como eventos normalmente necessitam de bens como cadeiras, mesas, entre
+outras coisas, que podem muito bem ser reutilizadas de evento para evento,
+também vai existir forma de "partilhar" esses bens. Se um evento acaba, mas
+daqui a uma semana tem outro evento, as cadeiras e mesas podem ser reutilizadas
+nesse outro evento, e é feita uma passagem de "\textit{ownership}" temporária
+do bem. Quem participa no evento com bens em falta, vai ter palavra sobre quais
+bens requisitar, da mesma forma que podem decidir mudanças de horário por
+exemplo. Se existir bens em excesso, elas continuam no "banco", mas se faltar,
+um dos organizadores compra o que falta e adiciona ao "banco" para puder ser
+utilizado em outro evento futuro. Esta transferência de bens serve para fazer
+\textit{analytics} também. Ver quais mercadorias tem maior disponibilidade e
+quais são as mais necessárias. Deste modo, até alguém que não organiza os
+eventos, pode doar mercadorias conforme as necessidades.
+
+\section{Objetivos}
+% Os objetivos gerais e específicos do trabalho.
+
+Isto é um trabalho para a escola, e eu acredito que o ensino tem que ser livre,
+outra razão para o projeto ser FLOSS também. Infelizmente não é isso que eu
+vejo, preferem <<preparar-nos para trabalhar nas empresas>>. O software
+proprietário é inerentemente contrário à educação e sabedoria, já que
+\textbf{não deixa o estudante estudar} o programa, o que ele realmente faz e
+como, modificar para as suas necessidades e a dos seus colegas e partilhar com
+os mesmos a versão modificada. Nas aulas de Matemática e Física eu sempre tive
+acesso à fórmulas e aos algoritmos, porquê que nas Ciências da Computação tem
+que ser diferente? Afinal, \autocite{guimaraesPitagoras}! Eu vou fazer a minha
+parte.
+
+Também faz-me sentido que os dados e a informação sejam abertos. Para isso vou
+ter em conta o \autocite{5stardata} e os \autocite{fair_principles}.
+
+Temos que pensar na internacionalização (i18n) e ter acessibilidade (a11y) em
+mente, pensar no offline, proteger a anonimidade dos utilizadores e encriptar
+comunicações quando elas têm que existir.
+
+Basicamente, a ideia não é existir diferentes tipos de utilizadores, todos os
+utilizadores vão ter o mesmo “poder” em tudo. A pessoa que cria o evento, de
+início, vai ter todo o poder sobre aquele evento. Mas depois de pessoas dizerem
+que vão participar no evento, elas tem tanto quanto o criador. As decisões são
+feitas por todos de forma democrática. Qualquer pessoa também poderá participar
+num evento (ao menos que horários colidam, ou sei lá). Qualquer um também
+consegue doar mercadorias para o banco. Mas pensando bem, era bom existir
+pessoas que conseguem melhor gerir o banco de mercadorias. Porque após um
+evento acabar, essas mercadorias não vão estar diretamente acessíveis, primeiro
+vão precisar serem devolvidas ou banco. Aí era preciso um gajo para trocar o
+status da mercadoria para “disponível”. Mas pensando mais um pouco, talvez não
+tenha de ser um tipo de utilizador diferente. Pode existir um sistema de dizer
+que alguém e o encarregado temporário da mercadoria, e ele tem a
+responsabilidade de, ou por a mercadoria no banco e marcar o status da
+mercadoria como disponível, ou entregar diretamente para o outro evento, e o
+status continua indisponível. Nas duas situações ele deixa de ser o encarregado
+da mercadoria. É de pensar.
+
+Um dia talvez eu desenvolva o projeto além da ideia atual. Explorar, para além
+da coordenação e mobilização comunitária e a troca de bens comuns e
+distribuição circular, a situação do planeamento e orçamentação coletivos e do
+conhecimento coletivo.
+
+Promover a gestão coletiva, o combate a burocracia, e uma real democracia
+direta.
+
+\section*{Estrutura do documento}
+
+O presente relatório encontra-se estruturado da seguinte forma:
+\begin{itemize}
+  \item O \textbf{Capítulo~\ref{ch:intro}} apresenta o enquadramento, a motivação, os objetivos e a metodologia do projeto;
+  \item O \textbf{Capítulo~\ref{ch:analysis}} descreve a análise de requisitos, os atores e os casos de uso do sistema \textit{SeUnem};
+  \item O \textbf{Capítulo~\ref{ch:design}} apresenta o desenho do sistema, incluindo diagramas UML e protótipos das interfaces;
+  \item Por fim, o \textbf{Capítulo~\ref{ch:conclusion}} sintetiza as conclusões do trabalho e perspetivas de evolução futura.
+\end{itemize}
+
+\chapter{Desenvolvimento}
+\label{ch:dev}
+
+% O desenvolvimento consiste na parte nuclear do trabalho; descreve
+% detalhadamente as ações realizadas, interpreta, ilustra, sistematiza e
+% relaciona dados e resultados. O corpo do trabalho deve incluir, caso exista,
+% de forma equilibrada e articulada com o texto, informação tabelar, imagens,
+% gráficos, etc. O desenvolvimento subdivide-se em capítulos e, eventualmente,
+% em subcapítulos.
+
+\section{Análise do Sistema}
+\label{ch:analysis}
+
+% Em seguida descrevem-se o levantamento e a especificação de requisitos dos
+% atores e dos casos de uso do sistema desenvolvidos durante esta fase de
+% análise do sistema.
+
+\subsection{Caracterização dos atores}
+
+% Caracterização o perfil dos possíveis tipos de utilizadores, em várias
+% vertentes (demográfica, físicas, social, literacia digital, entre outras) que
+% possam ajudar a uma melhor compreensão dos utilizadores alvo do sistema.
+% Especificar as personas como forma de melhor descrever esses perfis de
+% utilizador.
+
+\subsection{Diagrama de Casos de Uso}
+
+% Elaboração dos diagramas de casos de uso (5 no caso de um grupo de dois
+% alunos e 2 no caso de um aluno) deste sistema seguido da especificação das
+% respetivas tabelas de especificação de requisitos por cada caso de uso,
+% usando a notação UML (Unified Modelling Language).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{uml/use_cases}
+  \caption{Diagrama UML dos casos de uso.}
+  \label{fig:use_cases}
+\end{figure}
+
+\section{Desenho do Sistema}
+\label{ch:design}
+
+% Em seguida são descritos os modelos propostos de interfaces gráficos com o
+% utilizador e do modelo de dados.
+
+\subsection{Modelação da Base Dados}
+
+% Descrição dos modelos E/R e relacional/físico da base de dados. O modelo E/R
+% deve conter todas as entidades de dados e respetivas relações que descrevem
+% conceptualmente o sistema. O diagrama relacional/físico descreve o a
+% estrutura normalizada de tabelas e suas relações com a identificação dos seus
+% atributos e respetivos tipos.
+
+\subsubsection{Diagrama E/R}
+\subsubsection{Modelo Lógico Relacional}
+\subsection{Modelação de Interfaces Gráficas com o Utilizador}
+
+% Em seguida são descritos os modelos das interfaces gráficas desenvolvidas
+% suportados em protótipo de baixa/média fidelidade das interfaces gráficas com
+% o utilizador, compostos por um ou mais storyboard e os ecrãs (wireframes) da
+% aplicação. O storyboard poderá ser desenvolvido preferencialmente em baixa
+% fidelidade (papel e lápis) permite ter uma visão com baixo detalhe do esquema
+% de apresentação das páginas e perceber genericamente a sequência de ações de
+% navegação do utilizador no sistema. As propostas de wireframes
+% (ecrãs/páginas) mostram as interfaces gráficas com o utilizador e devem ser
+% agrupadas por caso de uso, mostrando o layout e o conteúdo de apresentação de
+% cada página Web, com um nível de fidelidade alta, bem como, a forma como o
+% utilizador interage com ela. As Wireframes podem ser desenvolvidas com
+% ferramentas específicas para o efeito, como por exemplo, o Pencil, Balsamiq,
+% InVision ou Figma.
+
+\subsubsection{\textit{Storyboard(s)}}
+\subsubsection{Interfaces do caso de uso “1”}
+\subsubsection{Interfaces do caso de uso “2”}
+\subsubsection{Interfaces do caso de uso “3”}
+
+\section{Metodologia}
+
+Como conta para nota, tenho requisitos a cumprir, e por isso, não posso fazer
+isto de qualquer forma. Vou ter que usar Programação Orientada a Objetos (POO)
+para criar uma RESTful API e um sistema MVC (se não sabes de o que é que estou
+a falar, vou tentar explicar no próximo parágrafo). Tive que escolher entre a
+plataforma \autocite{laravel} e a \autocite{aspnet_core}. Apesar de hoje em dia
+ASP.NET Core ser de código aberto, e eu sei que ia ser possível eu conseguir
+fazer o trabalho no meu Arch Linux \footcite{tsoding}, continua a ser do
+oligarca digital que é a Microsoft. Estarás mais sujeito a depender de algum
+software ou serviço do ecossistema da Microsoft que não é nem código aberto e
+muito menos FLOSS. Aliás, o que está no enunciado do projeto e o que dá a
+perceber é que se a implementação do projeto for com ASP.NET, eu teria que
+usar\mbox{ --- }vou ter que censurar\mbox{ --- }M\texttt{***}soft SQL
+S\texttt{***}ver. Consegui fazer a cadeira de Bases de Dados 1 sem ter que
+mexer nesse pedaço de software maligno e escapei de fazê-lo em Bases de Dados 2
+porque fiz intercâmbio numa escola que não me obrigou a usar esse software. Nós
+não queremos Microsoft nas nossas vidas. Não é como se ao escolher Laravel eu
+estivesse em melhores mãos porque a recomendação é MySQL da Oracle, outro
+monopólio digital imperialista. MySQL tem a versão \textit{Community} que é
+FLOSS, e a versão \textit{Enterprise} que é proprietária. A chance de eu ter
+que usar as extensões proprietárias é mínima, mas esse modelo de múltiplo
+licenciamento não quero suportar. Pessoas trabalham de graça ao contribuir para
+a versão FLOSS e depois chega a Oracle que explora esse trabalho em nome do
+capital. Para quem depende dessas extensões proprietárias, agora estás
+preso\mbox{ --- }\textit{vendor lock-in}. Mas bem... vou usar a \textit{fork}
+\autocite{mariadb_foundation}. Eu também já usei \autocite{php} antes. É uma
+experiência agradável mesmo sem a tipagem estática, e oiço falar de como
+Laravel tem um ótimo ecossistema e oferece uma ótima \textit{developer
+experience} (DX), como \autocite{inertiajs}, que vai permitir-me usar
+\autocite{svelte} para a parte das Views do sistema. Tem que existir
+autenticação e um sistema de data analytics.
+
+POO é um paradigma onde tu tens objetos, instâncias de classes. Uma classe é
+como se fosse uma receita para criar as instâncias, que propriedades e
+comportamentos elas terão. Depois cada instância do objeto é dona do seu estado
+que não depende do estado dos outros objetos da mesma classe. Eu e tu
+(assumindo que também és um Homo Sapiens Sapiens) ambos somos instâncias da
+mesma "classe" mas com propriedades diferentes. Algumas dessas propriedades até
+podem ser outros objetos, até de classes diferentes. Suponho que tu tenhas um
+smartphone --- eu sei que tenho um. Tem a possibilidade de até termos o mesmo
+modelo de smartphone, mas as propriedades individuais de ambos os smartphones
+com certeza já são diferentes. Outra cena fixe é que objetos conseguem mandar
+mensagens uns aos outros. Se eu carrego no botão para aumentar o volume do meu
+telemóvel ele há de reagir de alguma forma (aumentando o volume espero eu). No
+teu telemóvel deve acontecer o mesmo, mas não significa que aconteça da mesma
+forma. Cada objeto instância da mesma classe, por ter sido usada a mesma
+receita, oferecem os mesmos comportamentos, mas as propriedades por terem
+valores diferentes, podem afetar a execução do comportamento. No final, é
+esperado o mesmo resultado. Pensa assim, eu e tu provavelmente se nos mandassem
+vestir as mesmas meias e sapatos, talvez eu comece na esquerda e tu na direita,
+depois eu meto primeiro todas as meias e finalmente calço os 2 sapatos, e tu
+calças o sapato logo depois de cada meia. Então essas mensagens podem ser
+enviadas para qualquer tipo de objeto, instância da sua classe ou não, até para
+o próprio objeto. As mensagens também podem ser enviadas e recebidas de forma
+paralela.
+
+API é uma interface que permite comunicação entre várias máquinas e/ou vários
+programas de software. Essa interface oferece um serviço de um programa de
+software de forma padronizada. O exemplo do botão do telemóvel, esse botão é
+como uma interface.
+
+REST é uma lista de princípios de estilo arquitetónico para software. Esses
+princípios são na realidade restrições que limitam como um sistema de
+\textit{hypermedia} distribuido deve agir. Podes estar agora a pensar que criar
+restrições só deve complicar as coisas. Mas a verdade é que estas restrições
+criam um sistema sem estado (\textit{stateless}) e fiável. Interfaces
+uniformes, fácil separação de software em componentes menores, mais fácies de
+manter. Se o teu sistema não quebra nenhuma das restrições REST, então ele é
+\textit{RESTful}. Um dos pais do Hypertext Transfer Protocol (HTTP) foi quem
+surgiu com a ideia do REST, na sua dissertação de maestrado
+\autocite{fielding2000rest}.
+
+Uma API \textit{RESTful} é uma API para a Web que é \textit{RESTful}. Existem
+muitas formas de criar uma API \textit{RESTful}. O cliente pede um recurso de
+\textit{hypermedia} e recebe uma representação do estado do recurso que ele
+quis. Quando a API \textit{RESTful} é desenvolvida em cima do protocolo HTTP, o
+método e o cabeçalho do \textit{request} pode servir como formar de dar
+informação sobre tu e o teu \textit{request}, lembrando que a comunicação
+servidor--cliente é proibída de guardar estado entre \textit{requests}.
+
+MVC é uma padronização de arquitetura de software usando o paradigma de POO
+falado em cima, que separa partes do código em 3 partes, cada uma com as suas
+responsabilidades: o modelo, a vista, e o controlador. Um modelo representa
+algum componente ou parte do sistema. As vistas são representações visuais dos
+modelos. O controlador recebe mensagens do utilizador e manda-as tanto para os
+modelos que possivelmente mandam mensagens para as vistas o que pode modificar
+a informação que o utilizador vê (manda uma mensagem ao utilizador).
+
+Nesta etapa eu vou caracterizar os atores do sistema e os casos de uso com que
+eles interagem, usando \textit{Unified Modeling Language} (UML). Para isso,
+usei o meu fiel \autocite{plantuml} com o documento PDF da última especificação
+do UML\footcite{uml251} aberta.
+
+Também querem um protótipo de baixa / média fidelidade das interfaces. Para
+isso, o mais inteligente é só eu já começar a escrever o meu HTML, ou neste
+caso, componentes do Svelte. Poupas trabalho para a próxima etapa.
+
+Na minha opinião, quando tu não sabes como vai ser o teu projeto, mais vale
+começar logo a programar, e não perder tempo com diagramas e coisas que, depois
+que começas a programas, vais querer trocar. É uma perda de tempo. Tipo
+\textit{Test-driven development} (TDD).
+
+Para quê que tu queres <<uma visão com baixo detalhe do esquema de apresentação
+das páginas>> quando podes ter algo feito com HTML 5 semântico e que já te
+mostra <<a forma como o utilizador interage>> com as páginas Web e âncoras?
+
+Matar dois coelhos de uma só cacheirada.
+
+Depois gravo a tela e mando os vídeos como anexo junto ao relatório.
+
+O professor também pede o modelo ER que eu nunca sei como fazer porque cada
+professor faz de forma diferente e não existe uma padronização para eu seguir.
+O PlantUML vai ajudar-me outra vez de qualquer forma.
+
+O interessante deste projeto é que só existe um ator. Mas a interação entre
+vários atores cria uma certa complexidade, especialmente na participação
+democrática, que trás desafios já que todos os atores têm o mesmo poder.
+
+O que também é de pensar é a questão da autenticação, porque dependendo de como
+ela é feita, pode acabar com o sistema de democracia direta.
+
+\subsection{Ferramentas}
+Exemplo: Git, Linux, \LaTeX, Python, Docker.
+
+\subsection{Arquitetura do sistema}
+
+\section{Resultados}
+Apresente resultados, gráficos e tabelas.
+
+% \begin{table}[ht]
+%   \centering
+%   \caption{Número de visitantes do exemplo (tabela de exemplo).}
+%   \label{tab:visitors}
+%   \begin{tabular}{lrrr}
+%     \toprule
+%     Nome & Julho & Agosto & Média \\
+%     \midrule
+%     Castelo & 50 & 50 & 50 \\
+%     Museu & 11 & 13 & 13.3 \\
+%     \bottomrule
+%   \end{tabular}
+%   \vspace{0.3em}
+%   \caption*{\textit{Nota.} Fonte: dados de exemplo.}
+% \end{table}
+
+% CHAPTER 3 - CONCLUSION
+\chapter{Conclusão}
+\label{ch:conclusion}
+% Síntese dos trabalhos feitos, limitações e perspetivas futuras.
+
+% A conclusão apresenta a síntese do trabalho realizado, podendo remeter para
+% fases de estudo a desenvolver posteriormente. Corresponde, aproximadamente, a
+% um décimo das páginas do corpo do trabalho. O seu cabeçalho é numerado.
+
+% Resumo dos principais resultados obtidos nas tarefas desenvolvidas nesta fase
+% do projeto, bem como, antecipando a implementação/programação do sistema por
+% parte de cada autor do trabalho (em que tecnologia será desenvolvido cada
+% grupo de casos de uso).
+
+\section{Trabalho Futuro}
+
+
+
+%%%
+
+
+
+\clearpage
+\printbibliography[title={Referências Bibliográficas}]
+
+\clearpage
+\chapter*{Licença}
+\addcontentsline{toc}{chapter}{Licença}
+\noindent
+Este documento está licenciado sob uma
+\href{https://creativecommons.org/licenses/by-sa/4.0/}{Licença Creative Commons Atribuição–Partilha nos Mesmos Termos 4.0 Internacional (CC BY-SA 4.0)}.
+
+\vspace{0.5cm}
+O código fonte (ficheiros \texttt{.tex}, \texttt{.bib}, \texttt{Makefile}, etc.) utilizado para produzir este relatório está licenciado sob a
+\href{https://www.gnu.org/licenses/agpl-3.0.html}{GNU Affero General Public License v3.0 (AGPL v3)}.
+
+\clearpage
+\appendix
+\chapter{Apêndice A: Questionário}
+\label{app:questionario}
+Conteúdo do apêndice (ex.: questionários, listagens de dados).
+
+\chapter{Apêndice B: Código de Exemplo}
+\label{app:code}
+\begin{minted}[linenos, frame=lines, fontsize=\small]{python}
+def hello():
+    print("Olá, mundo!")
+\end{minted}
+
+\backmatter
+\chapter*{Anexos}
+\addcontentsline{toc}{chapter}{Anexos}
+\section*{Anexo A: Documento Externo}
+Texto de anexo.
+
+\end{document}
+
