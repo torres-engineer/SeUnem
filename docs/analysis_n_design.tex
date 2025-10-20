@@ -451,6 +451,17 @@ O presente relatório encontra-se estruturado da seguinte forma:
 % Especificar as personas como forma de melhor descrever esses perfis de
 % utilizador.
 
+Como talvez já deu para preceber, só existe um ator, coletivo, universal, e
+humano. Sem importância para a sua raça, etnia, cultura e identidade. Sem olhar
+para a carteira. No entanto, é de esperar que a pessoa tenha alguma prática com
+a Web 2.0 para conseguir usar o software.
+
+Alguém que gosta de conviver com outras pessoas, gosta de partilhar
+conhecimento e que conhecimento seja partilhado consigo.
+
+Talvez ainda dê para encaixar mais um ator que seria exclusivamente do sistema:
+o banco de bens.
+
 \subsection{Diagrama de Casos de Uso}
 
 % Elaboração dos diagramas de casos de uso (5 no caso de um grupo de dois
@@ -460,9 +471,25 @@ O presente relatório encontra-se estruturado da seguinte forma:
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.9\textwidth]{uml/use_cases}
-  \caption{Diagrama UML dos casos de uso.}
-  \label{fig:use_cases}
+  \includegraphics[width=0.9\textwidth]{uml/analysis_n_design}
+    \caption{Diagrama UML dos casos de uso: O actor \textit{User} listar
+    eventos e agrupá-los, filtrá-los e ordená-los.}
+  \label{fig:use_cases_list_event}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{uml/analysis_n_design_001}
+    \caption{Diagrama UML dos casos de uso: O actor \textit{User} quando
+    autenticado pode interagir com eventos seguindo-os e juntando-se a eles,
+    criando-os, e participando democráticamente.}
+    \label{fig:use_cases_interact_event}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{uml/analysis_n_design_002}
+  \caption{Diagrama UML dos casos de uso: O actor \textit{User} pode e é
+    encorajado a doar para o banco comun de bens.}
+  \label{fig:use_cases_add_bank}
 \end{figure}
 
 \section{Desenho do Sistema}
@@ -479,8 +506,15 @@ O presente relatório encontra-se estruturado da seguinte forma:
 % estrutura normalizada de tabelas e suas relações com a identificação dos seus
 % atributos e respetivos tipos.
 
-\subsubsection{Diagrama E/R}
-\subsubsection{Modelo Lógico Relacional}
+\subsubsection{Diagrama E/R \& Modelo Lógico Relacional}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{uml/analysis_n_design_003}
+  \caption{Modelo Entidade Relação.}
+  \label{fig:er_diagram}
+\end{figure}
+
 \subsection{Modelação de Interfaces Gráficas com o Utilizador}
 
 % Em seguida são descritos os modelos das interfaces gráficas desenvolvidas
@@ -518,22 +552,25 @@ perceber é que se a implementação do projeto for com ASP.NET, eu teria que
 usar\mbox{ --- }vou ter que censurar\mbox{ --- }M\texttt{***}soft SQL
 S\texttt{***}ver. Consegui fazer a cadeira de Bases de Dados 1 sem ter que
 mexer nesse pedaço de software maligno e escapei de fazê-lo em Bases de Dados 2
-porque fiz intercâmbio numa escola que não me obrigou a usar esse software. Nós
-não queremos Microsoft nas nossas vidas. Não é como se ao escolher Laravel eu
-estivesse em melhores mãos porque a recomendação é MySQL da Oracle, outro
-monopólio digital imperialista. MySQL tem a versão \textit{Community} que é
-FLOSS, e a versão \textit{Enterprise} que é proprietária. A chance de eu ter
-que usar as extensões proprietárias é mínima, mas esse modelo de múltiplo
-licenciamento não quero suportar. Pessoas trabalham de graça ao contribuir para
-a versão FLOSS e depois chega a Oracle que explora esse trabalho em nome do
-capital. Para quem depende dessas extensões proprietárias, agora estás
-preso\mbox{ --- }\textit{vendor lock-in}. Mas bem... vou usar a \textit{fork}
-\autocite{mariadb_foundation}. Eu também já usei \autocite{php} antes. É uma
-experiência agradável mesmo sem a tipagem estática, e oiço falar de como
-Laravel tem um ótimo ecossistema e oferece uma ótima \textit{developer
-experience} (DX), como \autocite{inertiajs}, que vai permitir-me usar
-\autocite{svelte} para a parte das Views do sistema. Tem que existir
-autenticação e um sistema de data analytics.
+porque fiz intercâmbio numa escola que não me obrigou a usar esse software. Mas
+caraças, na cadeira de Sistemas de Informação também usam (junto com o
+Microsoft Excel e outro que se chama Microsoft Power BI). Eu não tenho Windows
+(e ainda bem) no meu portátil por isso só consigo fazer trabalhos que usem isso
+nos PCs da escola. Nós não queremos Microsoft nas nossas vidas. Não é como se
+ao escolher Laravel eu estivesse em melhores mãos porque a recomendação é MySQL
+da Oracle, outro monopólio digital imperialista. MySQL tem a versão
+\textit{Community} que é FLOSS, e a versão \textit{Enterprise} que é
+proprietária. A chance de eu ter que usar as extensões proprietárias é mínima,
+mas esse modelo de múltiplo licenciamento não quero suportar. Pessoas trabalham
+de graça ao contribuir para a versão FLOSS e depois chega a Oracle que explora
+esse trabalho em nome do capital. Para quem depende dessas extensões
+proprietárias, agora estás preso\mbox{ --- }\textit{vendor lock-in}. Mas bem...
+vou usar a \textit{fork} \autocite{mariadb_foundation}. Eu também já usei
+\autocite{php} antes. É uma experiência agradável mesmo sem a tipagem estática,
+e oiço falar de como Laravel tem um ótimo ecossistema e oferece uma ótima
+\textit{developer experience} (DX), como \autocite{inertiajs}, que vai
+permitir-me usar \autocite{svelte} para a parte das Views do sistema. Tem que
+existir autenticação e um sistema de data analytics.
 
 POO é um paradigma onde tu tens objetos, instâncias de classes. Uma classe é
 como se fosse uma receita para criar as instâncias, que propriedades e
@@ -625,7 +662,15 @@ O que também é de pensar é a questão da autenticação, porque dependendo de
 ela é feita, pode acabar com o sistema de democracia direta.
 
 \subsection{Ferramentas}
-Exemplo: Git, Linux, \LaTeX, Python, Docker.
+
+\begin{itemize}
+  \item Git
+  \item make
+  \item PlantUML
+  \item PHP
+  \item Laravel
+  \item ...
+\end{itemize}
 
 \subsection{Arquitetura do sistema}
 

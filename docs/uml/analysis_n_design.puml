@@ -1,0 +1,193 @@
+/'
+    SeUnem - A free software platform for participatory decision-making and
+    collective event management.
+    Copyright (C) 2025  João Augusto Costa Branco Marado Torres
+    <torres.dev@disroot.org>
+
+    This file is part of SeUnem.
+
+    SeUnem is free software: you can redistribute it and/or modify it under the
+    terms of the GNU Affero General Public License as published by the Free
+    Software Foundation, either version 3 of the License, or (at your option)
+    any later version.
+
+    SeUnem is distributed in the hope that it will be useful, but WITHOUT ANY
+    WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+    FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License for
+    more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with SeUnem.  If not, see <https://www.gnu.org/licenses/>
+'/
+
+@startuml(id=USECASES)
+!option handwritten true
+
+mainframe SeUnem
+header Use Cases UML Diagram — List events
+
+footer SeUnem  © 2025 by João Augusto Costa Branco Marado Torres is licensed under CC BY-SA 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-sa/4.0/
+
+title User's listing events
+
+caption The actor User can list events and group, filter and order them.
+
+left to right direction
+
+actor User
+' actor BankSystem
+' actor NotificationService
+
+User -- (List events)
+(List events) <|-- (List event groups)
+(List events) ..> (List event groups) : <<extend>>
+' note bottom
+'   condition: {User selected a group}
+'   extension point: list events filtered by that group
+' end note
+User -- (See event)
+
+(Apply filters) ..> (List events) : <<extend>>
+(Apply ordering) ..> (List events) : <<extend>>
+
+newpage
+
+mainframe SeUnem
+header Use Cases UML Diagram — Interact with the events
+
+footer SeUnem  © 2025 by João Augusto Costa Branco Marado Torres is licensed under CC BY-SA 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-sa/4.0/
+
+title User's interaction with events
+
+caption The actor User when authenticated can interact with the events by following and joining them, creating them, and participating democratically.
+
+' left to right direction
+
+actor User
+
+(Authenticate) <.. (Follow event) : <<include>>
+
+User -- (Create event)
+(Join event) <.. (Create event) : "<<usage>>\nauto-joins creator"
+User -- (Join event)
+(Follow event) <.. (Join event) : <<include>>
+User -- (Follow event)
+
+User -- (Unfollow event)
+(Follow event) <.. (Unfollow event) : <<include>>
+User -- (Leave event)
+(Join event) <.. (Leave event) : <<include>>
+(Leave event) <.. (Unfollow event) : <<include>>
+
+User "1..*" -- "0..1" (Participate in event decisions)
+(Join event) <.. (Participate in event decisions) : <<include>>
+(Join event) ..> (Participate in event decisions) : <<extend>>
+' note bottom
+'   condition: {A decision has passed}
+'   extension point: Notify the event's attendees about the change, make them leave the event so they can join again if they still want to go.
+' end note
+(Participate in event decisions) <|-- (Update event)
+(Participate in event decisions) <|-- (Propose good needs)
+(Participate in event decisions) <|-- (Allocate goods from bank)
+(Participate in event decisions) <|-- (Manage goods)
+(Participate in event decisions) <|-- (Cancel event)
+(Propose good needs) <.. (Allocate goods from bank) : "<<usage>>\ndepends on defined needs"
+
+(Transfer ownership) ..> (Manage goods) : <<extend>>
+
+newpage
+
+mainframe SeUnem
+header Use Cases UML Diagram — Interact with the bank
+
+footer SeUnem  © 2025 by João Augusto Costa Branco Marado Torres is licensed under CC BY-SA 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-sa/4.0/
+
+title User's interaction with the bank
+
+caption The actor User can and is encouraged to donate to the communal bank of goods.
+
+left to right direction
+
+actor User
+
+User -- (Add good to bank)
+
+@enduml
+
+@startuml(id=ER)
+
+!option handwritten true
+
+mainframe SeUnem
+header Entity-Relationship Diagram
+
+footer SeUnem  © 2025 by João Augusto Costa Branco Marado Torres is licensed under CC BY-SA 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-sa/4.0/
+
+title ER Diagram
+
+caption Simple.
+
+skinparam linetype ortho
+
+entity Human {
+  *id : integer <<PK>> <<generated>>
+}
+
+entity Event {
+  *id : integer <<PK>> <<generated>>
+  --
+  title : text
+  start : date
+  end : date
+  location : integer <<FK>>
+}
+
+entity Location {
+  *id : integer <<PK>> <<generated>>
+  --
+  name : text
+  latitude : float
+  longitude : float
+  altitude : float
+}
+
+entity Tag {
+  *id : integer <<PK>> <<generated>>
+  --
+  name : text
+}
+
+entity Decision {
+  *id : integer <<PK>> <<generated>>
+  --
+  description : text
+}
+
+entity Vote {
+  *id : integer <<PK>> <<generated>>
+  --
+  value : boolean
+  option : text
+}
+
+entity Good {
+  *id : integer <<PK>> <<generated>>
+  --
+  name : text
+  description : text
+  event : integer <<FK>>
+}
+
+Human }|--o{ Event : follow
+Human }|--o{ Event : join
+Event }o--o| Location
+Event }o--|{ Tag
+Event ||--o{ Decision
+Decision ||--o{ Vote
+Human ||--o{ Vote
+Event |o--o{ Good
+
+' hide the spot
+hide circle
+@enduml
+
