@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	/**
 	 *    SeUnem - A free software platform for participatory decision-making
 	 *    and collective event management.
@@ -22,17 +22,10 @@
 	 *    <https://www.gnu.org/licenses/>
 	 */
 	import { inertia } from '@inertiajs/svelte';
+	import { ModeWatcher } from 'mode-watcher';
 
 	let { children } = $props();
 </script>
 
-<main>
-	<header>
-		<a use:inertia href="/">Home</a>
-		<a use:inertia href="/about">About</a>
-		<a use:inertia href="/contact">Contact</a>
-	</header>
-	<article>
-		{@render children()}
-	</article>
-</main>
+<ModeWatcher />
+{@render children()}

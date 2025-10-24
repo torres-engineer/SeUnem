@@ -19,29 +19,16 @@
  *    You should have received a copy of the GNU Affero General Public License
  *    along with SeUnem.  If not, see <https://www.gnu.org/licenses/>
  */
-import { defineConfig } from "vite";
-import laravel from "laravel-vite-plugin";
-import tailwindcss from "@tailwindcss/vite";
-import { svelte } from "@sveltejs/vite-plugin-svelte";
-import path from "node:path";
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
-export default defineConfig({
-  plugins: [
-    laravel({
-      input: ["resources/css/app.css", "resources/js/app.js"],
-      ssr: "resources/js/ssr.js",
-      refresh: true,
-    }),
-    tailwindcss(),
-    svelte(),
-  ],
-  // resolve: (name) => {
-  //   const pages = import.meta.glob("./Pages/**/*.svelte", { eager: true });
-  //   return pages[`./Pages/${name}.svelte`];
-  // },
-  resolve: {
-    alias: {
-      $lib: path.resolve("./resources/js"),
-    },
-  },
-});
+export function cn(...inputs: ClassValue[]) {
+	return twMerge(clsx(inputs));
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type WithoutChild<T> = T extends { child?: any } ? Omit<T, 'child'> : T;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type WithoutChildren<T> = T extends { children?: any } ? Omit<T, 'children'> : T;
+export type WithoutChildrenOrChild<T> = WithoutChildren<WithoutChild<T>>;
+export type WithElementRef<T, U extends HTMLElement = HTMLElement> = T & { ref?: U | null };

@@ -22,6 +22,9 @@
 	 *    <https://www.gnu.org/licenses/>
 	 */
 	import Layout from '@/layouts/Layout.svelte';
+	import { Calendar, FolderKanban } from '@lucide/svelte';
+	import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+	import { inertia } from '@inertiajs/svelte';
 
 	let { user } = $props();
 </script>
@@ -31,6 +34,43 @@
 </svelte:head>
 
 <Layout>
-	<h1>Welcome</h1>
-	<p>Hello {user.name}, welcome to your first Inertia app!</p>
+	<div class="flex min-h-screen items-center justify-center bg-background p-4">
+		<div class="w-full max-w-2xl">
+			<header class="mb-12 text-center">
+				<h1 class="mb-2 text-4xl font-bold text-foreground">Event Manager</h1>
+				<p class="text-muted-foreground">Choose how you want to browse events</p>
+			</header>
+
+			<div class="grid gap-6 md:grid-cols-2">
+				<a use:inertia href="/events" class="group">
+					<Card class="h-full transition-colors hover:border-primary">
+						<CardHeader class="text-center">
+							<div
+								class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 transition-colors group-hover:bg-primary/20"
+							>
+								<Calendar class="h-8 w-8 text-primary" />
+							</div>
+							<CardTitle>List Events</CardTitle>
+							<CardDescription>View all events in chronological order</CardDescription
+							>
+						</CardHeader>
+					</Card>
+				</a>
+
+				<a use:inertia href="/event-groups" class="group">
+					<Card class="h-full transition-colors hover:border-primary">
+						<CardHeader class="text-center">
+							<div
+								class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 transition-colors group-hover:bg-primary/20"
+							>
+								<FolderKanban class="h-8 w-8 text-primary" />
+							</div>
+							<CardTitle>Browse by Groups</CardTitle>
+							<CardDescription>Filter events by categories and tags</CardDescription>
+						</CardHeader>
+					</Card>
+				</a>
+			</div>
+		</div>
+	</div>
 </Layout>

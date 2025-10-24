@@ -27,9 +27,75 @@
  * @license https://opensource.org/licenses/AGPL-3.0 GNU Affero General Public License version 3
  */
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render("welcome", ["user" => ["name" => "user"]]);
+});
+
+$events = [];
+$commonTags = ['community', 'music', 'tech', 'art', 'education', 'environment'];
+
+for ($i = 0; $i < 20; $i++) {
+    $members = fake()->numberBetween(10, 1000);
+    $events[] = [
+        "title" => fake()->sentence(rand(3, 6)),
+        "status" => fake()->randomElement(['upcoming', 'cancelled', 'completed']),
+        "description" => fake()->paragraph(),
+        "start" => fake()->dateTimeBetween('-1 month', '+3 months')->format('Y-m-d\TH:i'),
+        "location" => ["name" => fake()->city()],
+        "memberCount" => $members,
+        "followerCount" => fake()->numberBetween($members, 1000),
+        "tags" => array_map(fn ($x) => ["name" => $x], fake()->randomElements($commonTags, rand(2, 4))),
+    ];
+}
+
+Route::get('/events', function (Request $req) use ($events, $commonTags) {
+    $tags = $req->query('tags', []);
+    if (!is_array($tags)) {
+        $tags = [$tags];
+    }
+
+    $filtered = array_values(array_filter(
+        $events,
+        fn($event) => array_all(
+            $tags,
+            fn($tag) => array_any(
+                $event["tags"],
+                fn($t) => strcmp($t["name"], $tag) === 0
+            )
+        )
+    ));
+
+    $tagsFromFiltered = collect($filtered)
+        ->flatMap(fn($event) => $event['tags'])
+        ->unique()
+        ->reject(fn($tag) => in_array($tag, $tags))
+        ->values()
+        ->all();
+
+    return Inertia::render("events", [
+        "events" => $filtered,
+        "tags" => count($tags) > 0 ? $tagsFromFiltered : [],
+    ]);
+});
+
+Route::get('/event-groups', function () use ($events, $commonTags) {
+    return Inertia::render("event_groups", [
+        "availableGroups" => array_map(
+            fn($x) => [
+                "name" => $x,
+                "count" => count(array_filter(
+                    $events,
+                    fn($y) => array_any(
+                        $y["tags"],
+                        fn($t) => strcmp($t["name"], $x) === 0
+                    )
+                ))
+            ],
+            $commonTags
+        ),
+    ]);
 });
