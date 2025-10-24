@@ -531,10 +531,30 @@ o banco de bens.
 % ferramentas específicas para o efeito, como por exemplo, o Pencil, Balsamiq,
 % InVision ou Figma.
 
-\subsubsection{\textit{Storyboard(s)}}
-\subsubsection{Interfaces do caso de uso “1”}
-\subsubsection{Interfaces do caso de uso “2”}
-\subsubsection{Interfaces do caso de uso “3”}
+Os protótipos de baixa e média fidelidade (\textit{wireframes}) foram criados
+diretamente com \texttt{Svelte}, de forma a garantir uma representação fiel da
+interação entre o utilizador e o sistema. Em vez de usar ferramentas externas
+de prototipagem, optei por começar a desenvolver a estrutura das interfaces
+reais, seguindo o princípio de que um protótipo executável é preferível a um
+diagrama estático.
+
+Todo o código-fonte correspondente encontra-se disponível no repositório
+\autocite{repo}. Para reproduzir localmente os protótipos, podem seguir-se os
+seguintes passos \ref{app:clone_wireframes}.
+
+Após estes comandos, as interfaces podem ser visualizadas localmente através do
+servidor de desenvolvimento. A versão deste commit (4f0d1c9) contém a estrutura
+de páginas que serviu de base para a análise e desenho do sistema.
+
+A opção por utilizar \texttt{Svelte} e \texttt{Inertia.js} (em vez de uma
+ferramenta de prototipagem tradicional) permitiu uma abordagem mais
+\textit{pragmática}, poupando tempo e assegurando a consistência entre o
+protótipo e o código final da aplicação.
+
+% \subsubsection{\textit{Storyboard(s)}}
+% \subsubsection{Interfaces do caso de uso “1”}
+% \subsubsection{Interfaces do caso de uso “2”}
+% \subsubsection{Interfaces do caso de uso “3”}
 
 \section{Metodologia}
 
@@ -662,20 +682,69 @@ O que também é de pensar é a questão da autenticação, porque dependendo de
 ela é feita, pode acabar com o sistema de democracia direta.
 
 \subsection{Ferramentas}
+\label{sec:ferramentas}
+
+Para o desenvolvimento do projeto \textit{SeUnem}, foram utilizadas diversas
+ferramentas livres e de código aberto, tanto para a implementação do sistema
+como para a documentação e modelação. Entre as principais, destacam-se:
 
 \begin{itemize}
-  \item Git
-  \item make
-  \item PlantUML
-  \item PHP
-  \item Laravel
-  \item ...
+  \item \textbf{Git} — Sistema de controlo de versões utilizado para gerir o
+  histórico de desenvolvimento e facilitar o trabalho colaborativo.
+  \item \textbf{Make} — Ferramenta de automatização utilizada para compilar e
+  gerar a documentação técnica (diagramas e relatórios).
+  \item \textbf{PlantUML} — Utilizada para a modelação dos diagramas UML,
+  incluindo casos de uso e entidades-relacionamentos.
+  \item \textbf{LaTeX} — Usado na redação e formatação do relatório técnico,
+  com o auxílio do pacote \texttt{minted} para a inclusão de código.
+  \item \textbf{PHP} — Linguagem de programação principal do \textit{backend}.
+  \item \textbf{Laravel} — Framework PHP utilizada para estruturar a aplicação
+  no lado do servidor, gerir as rotas e aceder à base de dados.
+  \item \textbf{Composer} — Gestor de dependências do ecossistema PHP.
+  \item \textbf{Node.js} e \textbf{pnpm} — Usados para gerir as dependências
+  do \textit{frontend}.
+  \item \textbf{Svelte} — Framework \textit{frontend} escolhida pela sua
+  simplicidade e eficiência, integrada através de \texttt{Inertia.js}.
+  \item \textbf{Vite} — Empregado como ferramenta de construção (\textit{build
+  tool}) e servidor de desenvolvimento.
+  \item \textbf{ESLint} e \textbf{Prettier} — Para assegurar a qualidade e
+  consistência do código no lado do cliente.
+  \item \textbf{MariaDB} — Base de dados leve usada durante o desenvolvimento e
+  prototipagem inicial.
 \end{itemize}
 
-\subsection{Arquitetura do sistema}
+\subsection{Arquitetura do Sistema}
+\label{sec:arquitetura}
 
-\section{Resultados}
-Apresente resultados, gráficos e tabelas.
+A aplicação \textit{SeUnem} adota uma arquitetura de três camadas, composta por:
+
+\begin{itemize}
+  \item \textbf{Camada de Apresentação (Frontend)} — Implementada em
+      \texttt{Svelte}, comunica com o servidor através do \texttt{Inertia.js},
+        permitindo renderização dinâmica sem necessidade de uma API REST
+        completa. Esta camada é responsável pela interação com o utilizador e
+        pela exibição das informações de eventos, decisões e bens comunitários.
+
+  \item \textbf{Camada Lógica (Backend)} — Desenvolvida em \texttt{Laravel},
+      contém a lógica de negócio, autenticação, gestão de permissões e
+        processos democráticos de decisão. O backend também gere a comunicação
+        entre as outras camadas e implementa os princípios de autogestão e
+        participação coletiva.
+
+  \item \textbf{Camada de Dados (Base de Dados)} — \texttt{MariaDB}, é
+      responsável pelo armazenamento persistente de entidades como
+        utilizadores, eventos, decisões, votos e bens.
+\end{itemize}
+
+A comunicação entre o \textit{frontend} e o \textit{backend} ocorre através de
+requisições HTTP geridas pelo \texttt{Inertia.js}, evitando a duplicação de
+lógica e garantindo uma experiência fluida de aplicação de página única
+(\textit{SPA — Single Page Application}). O sistema foi concebido de forma
+modular, permitindo a extensão futura para novos tipos de entidades ou modos
+de participação.
+
+% \section{Resultados}
+% Apresente resultados, gráficos e tabelas.
 
 % \begin{table}[ht]
 %   \centering
@@ -707,9 +776,55 @@ Apresente resultados, gráficos e tabelas.
 % parte de cada autor do trabalho (em que tecnologia será desenvolvido cada
 % grupo de casos de uso).
 
+O desenvolvimento do projeto \textit{SeUnem} permitiu consolidar conhecimentos
+adquiridos ao longo da licenciatura, nomeadamente no âmbito da análise,
+desenho e implementação de sistemas Web baseados em paradigmas modernos de
+engenharia de software. Esta fase de análise e desenho focou-se sobretudo em
+definir a estrutura conceitual da aplicação, os atores envolvidos, os casos de
+uso principais e o modelo de dados subjacente.
+
+O sistema proposto tem como propósito promover a participação democrática,
+autogestão e partilha comunitária através de software livre e descentralizado.
+A escolha de tecnologias e ferramentas FLOSS garantiu coerência com a visão
+ideológica do projeto — de que a tecnologia deve servir o coletivo e não o
+contrário. A arquitetura em três camadas (frontend, backend e base de dados)
+possibilita a evolução modular da plataforma, assegurando escalabilidade e
+manutenção a longo prazo.
+
+Entre as limitações encontradas, destaca-se o tempo reduzido para a
+implementação efetiva das funcionalidades democráticas mais complexas (como o
+processo deliberativo e de votação distribuída). Também se reconhece a
+necessidade de aprofundar mecanismos de autenticação e privacidade que
+preservem o anonimato sem comprometer a integridade da participação.
+
+De forma geral, os objetivos desta etapa foram atingidos: elaboraram-se os
+diagramas de casos de uso e E/R, a modelação da arquitetura, e os protótipos de
+baixa/média fidelidade, demonstrando a viabilidade técnica e conceptual do
+\textit{SeUnem}.
+
 \section{Trabalho Futuro}
 
+Numa fase futura, pretende-se evoluir o projeto no sentido de:
 
+\begin{itemize}
+  \item Implementar a totalidade da aplicação funcional baseada nos modelos
+      definidos nesta fase;
+  \item Desenvolver mecanismos de deliberação e votação descentralizada, com
+      foco em transparência e auditabilidade pública;
+  \item Melhorar a acessibilidade (\textit{a11y}) e a internacionalização
+      (\textit{i18n}), tornando a plataforma inclusiva e global;
+  \item Integrar protocolos federados para comunicação entre instâncias do
+      \textit{SeUnem}, rumo a uma rede de comunidades autogeridas;
+  \item Criar um módulo de \textit{analytics} participativo para visualizar a
+      utilização dos bens e recursos comunitários;
+  \item Estudar novas formas de autenticação descentralizada e mecanismos de
+      reputação não-hierárquica.
+\end{itemize}
+
+Assim, o \textit{SeUnem} continuará a ser um espaço experimental e
+tecnopolítico, orientado para repensar as práticas digitais de organização
+coletiva e participação democrática, sempre com base em software livre e
+valores de autonomia e partilha.
 
 %%%
 
@@ -731,22 +846,33 @@ O código fonte (ficheiros \texttt{.tex}, \texttt{.bib}, \texttt{Makefile}, etc.
 
 \clearpage
 \appendix
-\chapter{Apêndice A: Questionário}
-\label{app:questionario}
-Conteúdo do apêndice (ex.: questionários, listagens de dados).
+% \chapter{Apêndice A: Questionário}
+% \label{app:questionario}
+% Conteúdo do apêndice (ex.: questionários, listagens de dados).
 
-\chapter{Apêndice B: Código de Exemplo}
-\label{app:code}
-\begin{minted}[linenos, frame=lines, fontsize=\small]{python}
-def hello():
-    print("Olá, mundo!")
+\chapter{Apêndice: Linha de comandos}
+\label{app:clone_wireframes}
+\begin{minted}[linenos, frame=lines, fontsize=\small]{sh}
+# Clonar o repositório
+git clone https://github.com/torres-engineer/SeUnem.git seunem
+cd seunem
+
+# Alterar para o commit específico dos wireframes
+git checkout 4f0d1c9
+
+# Instalar as dependências do frontend e construir os ficheiros
+pnpm install
+pnpm build
+
+# Iniciar o ambiente de desenvolvimento do Laravel
+composer run dev
 \end{minted}
 
 \backmatter
-\chapter*{Anexos}
-\addcontentsline{toc}{chapter}{Anexos}
-\section*{Anexo A: Documento Externo}
-Texto de anexo.
+% \chapter*{Anexos}
+% \addcontentsline{toc}{chapter}{Anexos}
+% \section*{Anexo A: Documento Externo}
+% Texto de anexo.
 
 \end{document}
 
