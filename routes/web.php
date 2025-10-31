@@ -48,7 +48,7 @@ for ($i = 0; $i < 20; $i++) {
         "location" => ["name" => fake()->city()],
         "memberCount" => $members,
         "followerCount" => fake()->numberBetween($members, 1000),
-        "tags" => array_map(fn ($x) => ["name" => $x], fake()->randomElements($commonTags, rand(2, 4))),
+        "tags" => array_map(fn($x) => ["name" => $x], fake()->randomElements($commonTags, rand(2, 4))),
     ];
 }
 
@@ -72,7 +72,7 @@ Route::get('/events', function (Request $req) use ($events, $commonTags) {
     $tagsFromFiltered = collect($filtered)
         ->flatMap(fn($event) => $event['tags'])
         ->unique()
-        ->reject(fn($tag) => in_array($tag, $tags))
+        ->reject(fn($tag) => in_array($tag["name"], $tags))
         ->values()
         ->all();
 

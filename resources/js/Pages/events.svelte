@@ -81,24 +81,26 @@
 				<p class="text-muted-foreground">Browse all events chronologically</p>
 			</header>
 
-			<div class="grid gap-4 sm:grid-cols-3 md:grid-cols-4">
-				{#each tags as tag}
-					<a use:inertia href={`${base}&tags[]=${tag.name}`}>
-						<Card class="transition-colors hover:border-primary">
-							<CardHeader>
-								<div class="mb-2 flex items-start justify-between gap-2">
-									<div
-										class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10"
-									>
-										<Tag class="h-5 w-5 text-primary" />
+			{#if tags.length > 0}
+				<div class="mb-4 grid gap-4 sm:grid-cols-3 md:grid-cols-4">
+					{#each tags as tag}
+						<a use:inertia href={`${base}&tags[]=${tag.name}`}>
+							<Card class="transition-colors hover:border-primary">
+								<CardHeader>
+									<div class="mb-2 flex items-start justify-between gap-2">
+										<div
+											class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10"
+										>
+											<Tag class="h-5 w-5 text-primary" />
+										</div>
 									</div>
-								</div>
-								<CardTitle class="text-lg">{tag.name}</CardTitle>
-							</CardHeader>
-						</Card>
-					</a>
-				{/each}
-			</div>
+									<CardTitle class="text-lg">{tag.name}</CardTitle>
+								</CardHeader>
+							</Card>
+						</a>
+					{/each}
+				</div>
+			{/if}
 
 			<div class="space-y-4">
 				{#each events as event}
